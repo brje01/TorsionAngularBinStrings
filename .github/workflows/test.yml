@@ -20,14 +20,19 @@ jobs:
         python: ["3.10","3.11","3.12","3.13"]
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Set up Miniconda
-      uses: conda-incubator/setup-miniconda@v3
+      - name: Set up Miniconda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          python-version: ${{ matrix.python }}
+          auto-update-conda: true
+          activate-environment: ""
+          miniforge-variant: Mambaforge
 
-    - name: Install tox and tox-conda
-      run: |
-        conda install -c conda-forge tox tox-conda
+      - name: Install tox and tox-conda
+        run: |
+          conda install -c conda-forge tox tox-conda
 
-    - name: Run tox
-      run: tox
+      - name: Run tox
+        run: tox
