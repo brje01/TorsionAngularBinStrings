@@ -28,3 +28,34 @@ include = ["tabs"]
 
 [tool.setuptools.package-data]
 "tabs" = ["TorsionPreferences/*.json"]
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+isolated_build = True
+requires = tox-conda
+
+[testenv]
+setenv =
+    CONDA_DLL_SEARCH_MODIFICATION_ENABLE = 1
+conda_channels =
+    conda-forge
+conda_deps =
+    python=3.13
+    rdkit
+    scikit-learn
+    jupyter
+    ca-certificates
+    certifi
+    openssl
+    matplotlib
+    ipywidgets
+    py3Dmol
+    pytest
+    mdtraj
+    pytest-cov
+    tqdm
+commands = 
+    pip install .
+    pytest    
+"""

@@ -20,25 +20,14 @@ jobs:
         python: ["3.10","3.11","3.12","3.13"]
 
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v4
+    - uses: actions/checkout@v3
 
-      - name: Set up Miniconda
-        uses: conda-incubator/setup-miniconda@v3
-        with:
-          python-version: ${{ matrix.python }}
-          auto-update-conda: true
+    - name: Set up Miniconda
+      uses: conda-incubator/setup-miniconda@v3
 
-      - name: Install mamba
-        run: |
-          conda install -y mamba -c conda-forge
+    - name: Install tox and tox-conda
+      run: |
+        conda install -c conda-forge tox tox-conda
 
-      - name: Create environment with mamba
-        run: |
-          mamba env update -f environment.yml -n testenv
-          conda activate testenv
-
-      - name: Test with pytest
-        run: |
-          conda activate testenv
-          pytest
+    - name: Run tox
+      run: tox
