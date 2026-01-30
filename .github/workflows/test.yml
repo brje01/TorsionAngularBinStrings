@@ -28,7 +28,7 @@ jobs:
       - name: Install tox, tox-conda and py
         shell: bash -l {0}
         run: |
-          conda install -c conda-forge tox tox-conda py
+          conda install -c conda-forge tox=3.28.0 tox-conda py
 
       - name: Run tox
         shell: bash -l {0}
