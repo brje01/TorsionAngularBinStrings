@@ -13,7 +13,7 @@ on:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
-    
+
     strategy:
       matrix:
         os: ["ubuntu-latest"]
@@ -23,17 +23,22 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: Setup Python ${{ matrix.python }}
-        uses: actions/setup-python@v5
+      - name: Set up Miniconda
+        uses: conda-incubator/setup-miniconda@v3
         with:
           python-version: ${{ matrix.python }}
+          auto-update-conda: true
 
-      - name: Install dependencies
+      - name: Install mamba
         run: |
-          python -m pip install --upgrade pip
-          pip install pytest
-          pip install -r requirements.txt
+          conda install -y mamba -c conda-forge
+
+      - name: Create environment with mamba
+        run: |
+          mamba env update -f environment.yml -n testenv
+          conda activate testenv
 
       - name: Test with pytest
         run: |
+          conda activate testenv
           pytest
