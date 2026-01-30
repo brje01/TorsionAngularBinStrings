@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         os: ["ubuntu-latest"]
-        python: ["3.10","3.11","3.12","3.13"]
+        python: ["3.10", "3.11", "3.12", "3.13"]
 
     steps:
       - uses: actions/checkout@v3
@@ -25,10 +25,8 @@ jobs:
       - name: Set up Miniconda
         uses: conda-incubator/setup-miniconda@v3
         with:
-          python-version: ${{ matrix.python }}
-          auto-update-conda: true
-          activate-environment: ""
           miniforge-variant: Mambaforge
+          auto-update-conda: true
 
       - name: Install tox and tox-conda
         run: |
