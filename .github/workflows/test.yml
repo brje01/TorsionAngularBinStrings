@@ -24,9 +24,6 @@ jobs:
 
       - name: Set up Miniconda
         uses: conda-incubator/setup-miniconda@v3
-        with:
-          miniforge-variant: Mambaforge
-          auto-update-conda: true
 
       - name: Install tox and tox-conda
         run: |
