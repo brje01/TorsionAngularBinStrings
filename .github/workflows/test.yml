@@ -26,8 +26,10 @@ jobs:
         uses: conda-incubator/setup-miniconda@v3
 
       - name: Install tox and tox-conda
+        shell: bash -l {0}
         run: |
           conda install -c conda-forge tox tox-conda
 
       - name: Run tox
+        shell: bash -l {0}
         run: tox
